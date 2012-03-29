@@ -1,51 +1,62 @@
 <!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
 <html lang="en-US">
 <head>
 	<meta charset="utf-8">
-	<title>jQuery cssP</title>
+	<title>jQuery cssP Plugin - Play with the css of Pseudo Elements</title>
 	<link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet'>
 	<link rel="stylesheet" href="unrelated-demo-files/styles.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0">	
+	<meta property="og:title" content="Play with the css of Pseudo Elements" />
+	<meta property="og:description" content='A minimalistic jQuery Car(ousel) Plugin, with a "fast-rewind" effect upon reaching the end.' />
+	<meta property="og:url" content="http://reallygood.co.il/plugins/car/" />
+	
+	<!-- Code above this point isn't related to the demo --> 
+	 
 	<style>
-		h1 {position: relative; display: inline-block;}
-		h1:after {content: ''; position: absolute; background: orange; width: 100px; height: 3px; bottom: 2px;}
+		h1 {position: relative;}
+		h1:before {content: '\2665'; position: absolute; color: #CD1728; width: 80px; height: 3px; top: -20px;}
 	</style>
 </head>
 <body>
 	<h1>jQuery cssP</h1>
 	<p class="intro">Hello, world</p>
-	<p>The orange line under the heading above is the <code>:after</code> pseudo-element of the title, and its position is calculated on the fly on each <a href="javascript:location=location;">reload</a> and set via cssP. <br>
-	<p>Also, the <code>:before</code> ruleset of that heading is: <code><output></output></code> Inspect and view source to learn more.</p>
+	<p>The lovely heart above the heading is the <code>:before</code> pseudo-element of the title, and its position is calculated on the fly on each <a href="javascript:location=location;">reload</a> and set via cssP. <br>
+	Also, the <code>:after</code> ruleset of that heading is: <code><output></output></code> Inspect and view source to learn more.</p>
 	
 	
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<!-- Use jquery.cssp.min.js in production -->
 	<script src="jquery.cssp.js"></script>
 	<script>
 		$('h1').cssP({
-			before: 'content: "Introducing: "; font-weight: normal;', // accepts a string or a function which should return a string
-			after: function(){
+			before: function(){
 				var direction = Math.random() < .5 ? 'left' : 'right';
-				var distance = Math.floor( Math.random() * 10 );				
+				var distance = Math.floor( Math.random() * 100 );				
 				return direction + ': ' + distance + 'px;';
-			}
+			},
+			after: 'content: "seudos"; font-weight: normal; color: rgba(0,0,0,0.4);',
 		});
 		
 		$('p.intro').cssP({
 			after: 'content: "!";'
 		});
 		
-		$('output').html( $('h1').cssP('before') );
+		$('output').html( $('h1').cssP('after') );
 	</script>
 	
 	
 	<!-- Code below this point isn't related to the demo -->
 
 <footer>
-<a href="https://github.com/ReallyGood/jQuery-Car"><img style="position: absolute; top: 0; right: 0; border: 0; background: transparent;" src="unrelated-demo-files/forkme.png" alt="Fork me on GitHub"></a>
+<a href="https://github.com/ReallyGood/jQuery-cssP"><img style="position: absolute; top: 0; right: 0; border: 0; background: transparent;" src="unrelated-demo-files/forkme.png" alt="Fork me on GitHub"></a>
 <div id="social" class="cf">
-	<a href="http://www.facebook.com/sharer.php?u=http://reallygood.co.il/plugins/cssp/" class="socialite facebook" data-href="http://reallygood.co.il/plugins/cssp/" data-send="true" data-layout="button_count" data-width="60" data-show-faces="false" rel="nofollow" target="_blank">
+	<a href="http://www.facebook.com/sharer.php?u=http://reallygood.co.il/plugins/cssp" class="socialite facebook" data-href="http://reallygood.co.il/plugins/cssp" data-send="true" data-layout="button_count" data-width="60" data-show-faces="false" rel="nofollow" target="_blank">
 		<span>Share on Facebook</span>
 	</a>
-	<a href="http://twitter.com/share" class="socialite twitter" data-text="jQuery cssP- a plugin to get and set styles for pseudo-elements" data-url="http://reallygood.co.il/plugins/cssp/" data-count="horizontal" data-via="ReallyGoodTeam" rel="nofollow" target="_blank">
+	<a href="http://twitter.com/share" class="socialite twitter" data-text="jQuery cssP Plugin - Play with the css of Pseudo Elements" data-url="http://reallygood.co.il/plugins/cssp" data-count="horizontal" data-via="ReallyGoodTeam" rel="nofollow" target="_blank">
 		<span>Share on Twitter</span>
 	</a>
 </div>
