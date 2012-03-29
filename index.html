@@ -21,10 +21,10 @@
 	</style>
 </head>
 <body>
-	<h1>jQuery cssP</h1>
-	<p class="intro">Hello, world</p>
+	<h1>jQuery cssP</h1>	
 	<p>The lovely heart above the heading is the <code>:before</code> pseudo-element of the title, and its position is calculated on the fly on each <a href="javascript:location=location;">reload</a> and set via cssP. <br>
-	Also, the <code>:after</code> ruleset of that heading is: <code><output></output></code> Inspect and view source to learn more.</p>
+	Also, the <code>:after</code> ruleset of that heading is: <code><output></output></code></p>
+	<p>Inspect, view source and read the <a href="https://github.com/ReallyGood/jQuery-cssP#readme">manual</a> to learn more.</p>
 	
 	
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -39,11 +39,7 @@
 			},
 			after: 'content: "seudos"; font-weight: normal; color: rgba(0,0,0,0.4);',
 		});
-		
-		$('p.intro').cssP({
-			after: 'content: "!";'
-		});
-		
+
 		$('output').html( $('h1').cssP('after') );
 	</script>
 	
