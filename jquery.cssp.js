@@ -4,7 +4,7 @@ $.cssP = (function(){
 	var cache = {},
 		methods = {};
 	$.extend(methods, {
-		updateEl: function(el, changes){
+		update: function(el, changes){
 			var s = el.selector,
 				styleTag = cache[s] || $('<style></style>').appendTo('body');
 			cache[s] = styleTag;
@@ -21,15 +21,12 @@ $.cssP = (function(){
 						newRuleset = ruleset();
 						if(typeof newRuleset != 'string') skip = true;
 					} catch(e){
-						throw Error('The passed function has errors in it.');
+						throw Error('The passed function has errors in it:', e);
 						skip = true;
 					}
 				} else if(typeof ruleset === 'string') {
 					// yay, an actual string!
 					newRuleset = ruleset;
-				} else {
-					// sorry mate
-					throw Error('Sorry, ruleset must be or return a string');
 				}
 
 				if(!skip) {
@@ -38,20 +35,21 @@ $.cssP = (function(){
 				}
 			});
 			
-			methods.writeStylesheet(styleTag, stylesheet);
+			methods.updateSS(styleTag, stylesheet);
 		},
-		writeStylesheet: function(tag, sheet){			
+		updateSS: function(tag, sheet){			
 			$(tag).text(sheet);
 		}
 	});
 
 	$.fn.cssP = function(changes){
 		var $this = $(this);		
-		methods.updateEl($this, changes);
+		methods.update($this, changes);
 		return $this;
 	};
 
-	return methods.globalUpdate;
+	// could be useful some day
+	return;
 })();
 
 })(jQuery);
