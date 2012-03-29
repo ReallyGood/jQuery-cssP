@@ -3,26 +3,30 @@
 <head>
 	<meta charset="utf-8">
 	<title>jQuery cssP</title>
+	<style>
+		h1 {position: relative; display: inline-block;}
+		h1:after {content: ''; position: absolute; background: orange; width: 100px; height: 3px; bottom: 2px;}
+	</style>
 </head>
 <body>
 	<h1>jQuery cssP</h1>
+	<p>Hello, world</p>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script src="jquery.cssp.js"></script>
 	<script>
 		$('h1').cssP({
-			before: 'margin-left: 10px;', // accepts a string or a function which should return a string
+			before: 'content: "Introducing: ";', // accepts a string or a function which should return a string
 			after: function(){
 				var direction = Math.random() < .5 ? 'left' : 'right';
-				var distance = Math.floor( Math.random() * 1000 );
+				var distance = Math.floor( Math.random() * 10 );
+				console.log(distance);
 				return direction + ': ' + distance + 'px;';
 			}
 		});
 		
-		$('h1').cssP({
+		$('p').cssP({
 			after: 'content: "!";'
 		});
-		
-		$.cssP('body {background: #f9f9f9;} html:before {content: "Hello there :-)"}');
 	</script>
 </body>
 </html>
