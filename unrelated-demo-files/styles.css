@@ -2,10 +2,10 @@
 body {font-family: Vollkorn, Georgia, "New Century Schoolbook", "Nimbus Roman No9 L", serif; background: url(snow.png); margin: 20px;}
 footer {font-family: Georgia,"New Century Schoolbook","Nimbus Roman No9 L",serif;}
 p {margin: 5px 0; font-size: 18px;}
-code {font-family: Consolas, monospace; color: #333;}
+code {font-family: Consolas, monospace; color: #333; font-size: 95%;}
 footer {font-style: italic; color: #777; margin-top: 30px;}
 footer p {font-size: 16px;}
-footer a {color: #CD1728;}
+a {color: #CD1728;}
 
 
 /* Socialite.css */
