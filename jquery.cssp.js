@@ -4,7 +4,7 @@ $.cssP = (function(){
 	var cache = {},
 		methods = {};
 	$.extend(methods, {
-		update: function(el, changes){
+		set: function(el, changes){
 			var s = el.selector,
 				styleTag = cache[s] || $('<style></style>').appendTo('body');
 			cache[s] = styleTag;
@@ -30,7 +30,7 @@ $.cssP = (function(){
 				}
 
 				if(!skip) {
-					declaration = s + ':' + key + ' {' + newRuleset + '}';
+					declaration = s + ':' + key + '{' + newRuleset + '}';
 					stylesheet += declaration + '\r';
 				}
 			});
@@ -39,13 +39,22 @@ $.cssP = (function(){
 		},
 		updateSS: function(tag, sheet){			
 			$(tag).text(sheet);
+		},
+		get: function(el, pseudo){
+			var sheet = cache[el.selector].text();
+			sheet = sheet.split(':' + pseudo)[1].split('}')[0].slice(1);			
+			return sheet;
 		}
 	});
 
-	$.fn.cssP = function(changes){
-		var $this = $(this);		
-		methods.update($this, changes);
-		return $this;
+	$.fn.cssP = function(data){
+		var $this = $(this);
+		if(typeof data === 'object') {
+			methods.set($this, data);
+			return $this;
+		} else if(data == 'before' || data == 'after'){
+			return methods.get($this, data);
+		}
 	};
 
 	// could be useful some day

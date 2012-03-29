@@ -10,7 +10,8 @@
 </head>
 <body>
 	<h1>jQuery cssP</h1>
-	<p>Hello, world</p>
+	<p class="intro">Hello, world</p>
+	<p>The <code>:before</code> stylesheet of the heading above is: <code><output></output></code></p>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script src="jquery.cssp.js"></script>
 	<script>
@@ -18,15 +19,16 @@
 			before: 'content: "Introducing: ";', // accepts a string or a function which should return a string
 			after: function(){
 				var direction = Math.random() < .5 ? 'left' : 'right';
-				var distance = Math.floor( Math.random() * 10 );
-				console.log(distance);
+				var distance = Math.floor( Math.random() * 10 );				
 				return direction + ': ' + distance + 'px;';
 			}
 		});
 		
-		$('p').cssP({
+		$('p.intro').cssP({
 			after: 'content: "!";'
 		});
+		
+		$('output').html( $('h1').cssP('before') );
 	</script>
 </body>
 </html>
