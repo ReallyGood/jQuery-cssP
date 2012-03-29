@@ -1,10 +1,12 @@
 ##jQuery cssP - Play with the css of Pseudo Elements
 __jQuery cssP__ is a lightweight plugin, letting you set and get the css of pseudo elements.
-Notice: in its current form, it only gets the styles which the plugin itself has set.
 
 ## Demo
 Check out the [__DEMO__](http://reallygood.co.il/plugins/car/) page (or look at `index.html`).
 
+### Known Limitations
+1. In its current form, it only gets the styles which the plugin itself has set.
+1. The plugin doesn't work well with compound selectors (see [issue #1](https://github.com/ReallyGood/jQuery-cssP/issues/1)).
 
 ## Usage:
 
