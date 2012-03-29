@@ -3,6 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<title>jQuery cssP</title>
+	<link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet'>
+	<link rel="stylesheet" href="unrelated-demo-files/styles.css">
 	<style>
 		h1 {position: relative; display: inline-block;}
 		h1:after {content: ''; position: absolute; background: orange; width: 100px; height: 3px; bottom: 2px;}
@@ -30,5 +32,34 @@
 		
 		$('output').html( $('h1').cssP('before') );
 	</script>
+	
+	
+	<!-- Code below this point isn't related to the demo -->
+
+<footer>
+<a href="https://github.com/ReallyGood/jQuery-Car"><img style="position: absolute; top: 0; right: 0; border: 0; background: transparent;" src="unrelated-demo-files/forkme.png" alt="Fork me on GitHub"></a>
+<div id="social" class="cf">
+	<a href="http://www.facebook.com/sharer.php?u=http://reallygood.co.il/plugins/cssp/" class="socialite facebook" data-href="http://reallygood.co.il/plugins/cssp/" data-send="true" data-layout="button_count" data-width="60" data-show-faces="false" rel="nofollow" target="_blank">
+		<span>Share on Facebook</span>
+	</a>
+	<a href="http://twitter.com/share" class="socialite twitter" data-text="jQuery cssP- a plugin to get and set styles for pseudo-elements" data-url="http://reallygood.co.il/plugins/cssp/" data-count="horizontal" data-via="ReallyGoodTeam" rel="nofollow" target="_blank">
+		<span>Share on Twitter</span>
+	</a>
+</div>
+<script src="unrelated-demo-files/socialite-1.0.min.js"></script>
+<script>
+	$(window).bind('load', function(){
+		Socialite.load( $('#social')[0] );
+	});
+</script>
+
+<p>a <a href="http://reallygoodteam.com" target="_blank">Really good</a> Plugin</p>
+</footer>
+<script>
+	var _gaq=[['_setAccount','UA-20534477-1'],['_trackPageview']];
+	(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+	g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+	s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
 </body>
 </html>

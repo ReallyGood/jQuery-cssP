@@ -1,0 +1,40 @@
+/* Page styles */
+body {font-family: Vollkorn, Georgia, "New Century Schoolbook", "Nimbus Roman No9 L", serif; background: url(snow.png); margin: 20px;}
+footer {font-family: Georgia,"New Century Schoolbook","Nimbus Roman No9 L",serif;}
+p {margin: 5px 0; font-size: 18px;}
+code {font-family: Consolas, monospace; color: #333;}
+footer {font-style: italic; color: #777; margin-top: 30px;}
+footer p {font-size: 16px;}
+footer a {color: #CD1728;}
+
+
+/* Socialite.css */
+.cf:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
+* html .cf { zoom: 1; }
+*:first-child+html .cf { zoom: 1; }
+
+
+/*
+ * Socialite
+ */
+.socialite-button { opacity: 0; }
+.socialite-loaded .socialite-button { opacity: 1;}
+.socialite-button iframe { max-width: 100%; max-height: 100%; }
+
+/*
+ * Socialite Custom Default
+ */
+
+#social-load { margin: 0 0 0.625em 0; font-weight: bold; padding: 5px; }
+
+#social { display: block; list-style: none; margin: 10px 0 20px; position: relative;}
+#social .socialite {width: 50px;}
+#social .socialite,
+#social .socialised { display: inline-block; position: relative; vertical-align: middle;}
+#social .socialite,
+#social .socialised { height: 30px; background: url('custom-default.png') 0 0 no-repeat;}
+#social .socialised {width: 115px;}
+#social .socialite span { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+#social .twitter { background-position: 0 0; }
+#social .facebook { background-position: 0 -90px; }
+#social .socialite-loaded { background: none; }
