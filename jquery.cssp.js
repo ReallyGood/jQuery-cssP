@@ -11,8 +11,9 @@ $.cssP = (function(){
 		methods = {};
 	$.extend(methods, {
 		set: function(el, changes){
-			var s = el.selector,
-				styleTag = cache[s] || $('<style></style>').appendTo('body');
+			var s = el.selector;
+			if(!s) return;
+			styleTag = cache[s] || $('<style></style>').appendTo('body');
 			cache[s] = styleTag;
 			
 			var stylesheet = '';
@@ -47,8 +48,14 @@ $.cssP = (function(){
 			$(tag).text(sheet);
 		},
 		get: function(el, pseudo, getFull){
-			var sheet = cache[el.selector].text();
-			if(!getFull) sheet = sheet.split(':' + pseudo)[1].split('}')[0].slice(1);
+			if(!cache[el.selector]) return null;
+
+			var sheet = cache[el.selector].text();			
+			if(!getFull) {
+				sheet = sheet.split(':' + pseudo)[1];
+				if(!sheet) return null;
+				sheet = sheet.split('}')[0].slice(1);
+			}
 			return sheet;
 		}
 	});
