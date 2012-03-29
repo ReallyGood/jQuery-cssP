@@ -1,5 +1,5 @@
-/*
- * jQuery cssP Plugin - https://reallygood.co.il/plugins/cssp
+/*!
+ * jQuery cssP Plugin - https://github.com/ReallyGood/jQuery-cssP
  * v0.0.1, MIT licensed
  * by Really Good: http://reallygoodteam.com
  */
@@ -22,12 +22,12 @@ $.cssP = (function(){
 					skip;
 				
 				if(typeof ruleset === 'function') {
-					// let's do our best to get a string back from it
+					// let's do our best to get a string back
 					try {
 						newRuleset = ruleset();
 						if(typeof newRuleset != 'string') skip = true;
 					} catch(e){
-						throw Error('The passed function has errors in it:', e);
+						throw Error('The function failed:', e);
 						skip = true;
 					}
 				} else if(typeof ruleset == 'string') {
@@ -43,7 +43,7 @@ $.cssP = (function(){
 			
 			methods.updateSS(styleTag, stylesheet);
 		},
-		updateSS: function(tag, sheet){			
+		updateSS: function(tag, sheet){
 			$(tag).text(sheet);
 		},
 		get: function(el, pseudo, getFull){
@@ -62,9 +62,6 @@ $.cssP = (function(){
 			return methods.get($this, data, getFull);
 		}
 	};
-
-	// could be useful some day
-	return;
 })();
 
 })(jQuery);
