@@ -1,12 +1,12 @@
 (function($){
 
 $.cssP = (function(){
-	var cache = {};
-	var methods = {};
+	var cache = {},
+		methods = {};
 	$.extend(methods, {
 		updateEl: function(el, changes){
-			var s = el.selector;
-			var styleTag = cache[s] || $('<style></style>').appendTo('body');
+			var s = el.selector,
+				styleTag = cache[s] || $('<style></style>').appendTo('body');
 			cache[s] = styleTag;
 			
 			var stylesheet = '';
@@ -24,20 +24,25 @@ $.cssP = (function(){
 				stylesheet += declaration + '\r';
 			});
 			
-			$(el).trigger('update.cssp', {"tag": styleTag, "sheet": stylesheet});
+			methods.writeStylesheet(styleTag, stylesheet);
 		},
-		writeStylesheet: function(ev, d){			
-			$(d.tag).text(d.sheet);
+		globalUpdate: function(stylesheet){
+			var styleTag = cache.global || $('<style></style>').appendTo('body');
+			cache.global = styleTag;
+			methods.writeStylesheet(styleTag, stylesheet);
+		},
+		writeStylesheet: function(tag, sheet){			
+			$(tag).text(sheet);
 		}
 	});
 
 	$.fn.cssP = function(changes){
-		var $this = $(this);
-		$this.bind('update.cssp', methods.writeStylesheet);
+		var $this = $(this);		
 		methods.updateEl($this, changes);
 		return $this;
 	};
-})();
 
+	return methods.globalUpdate;
+})();
 
 })(jQuery);
