@@ -1,6 +1,6 @@
 /*!
  * jQuery cssP Plugin - https://github.com/ReallyGood/jQuery-cssP
- * v0.0.1, MIT licensed
+ * v0.0.2, MIT licensed
  * by Really Good: http://reallygoodteam.com
  */
 
