@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<title>jQuery cssP</title>
+</head>
+<body>
+	<h1>jQuery cssP</h1>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="jquery.cssp.js"></script>
+	<script>
+		$('h1').cssP({
+			before: 'margin-left: 10px;', // accepts a string or a function which should return a string
+			after: function(){
+				var direction = Math.random() < .5 ? 'left' : 'right';
+				var distance = Math.floor( Math.random() * 1000 );
+				return direction + ': ' + distance + 'px;';
+			}
+		});
+	</script>
+</body>
+</html>
