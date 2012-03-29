@@ -24,7 +24,7 @@ $.cssP = (function(){
 						throw Error('The passed function has errors in it:', e);
 						skip = true;
 					}
-				} else if(typeof ruleset === 'string') {
+				} else if(typeof ruleset == 'string') {
 					// yay, an actual string!
 					newRuleset = ruleset;
 				}
