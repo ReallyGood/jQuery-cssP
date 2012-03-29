@@ -1,3 +1,9 @@
+/*
+ * jQuery cssP Plugin - https://reallygood.co.il/plugins/cssp
+ * v0.0.1, MIT licensed
+ * by Really Good: http://reallygoodteam.com
+ */
+
 (function($){
 
 $.cssP = (function(){
@@ -40,20 +46,20 @@ $.cssP = (function(){
 		updateSS: function(tag, sheet){			
 			$(tag).text(sheet);
 		},
-		get: function(el, pseudo){
+		get: function(el, pseudo, getFull){
 			var sheet = cache[el.selector].text();
-			sheet = sheet.split(':' + pseudo)[1].split('}')[0].slice(1);			
+			if(!getFull) sheet = sheet.split(':' + pseudo)[1].split('}')[0].slice(1);
 			return sheet;
 		}
 	});
 
-	$.fn.cssP = function(data){
+	$.fn.cssP = function(data, getFull){
 		var $this = $(this);
 		if(typeof data === 'object') {
 			methods.set($this, data);
 			return $this;
 		} else if(data == 'before' || data == 'after'){
-			return methods.get($this, data);
+			return methods.get($this, data, getFull);
 		}
 	};
 
