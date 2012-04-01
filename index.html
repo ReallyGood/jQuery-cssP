@@ -22,8 +22,9 @@
 </head>
 <body>
 	<h1>jQuery cssP</h1>	
-	<p>The lovely heart above the heading is the <code>:before</code> pseudo-element of the title, and its position is calculated on the fly on each <a href="javascript:location=location;">reload</a> and set via cssP. <br>
-	Also, the <code>:after</code> ruleset of that heading is: <code><output></output></code></p>
+	<p>The lovely heart above the heading is the <code>:before</code> pseudo-element of the title, and its position is calculated on the fly on each <a href="javascript:location=location;">reload</a> and set via cssP.</p>
+	<p>Here it is before the change: <code class="block"><output id="b"></output></code> <br>
+	And here after: <code class="block"><output id="a"></output></code></p>
 	<p>Inspect, view source and read the <a href="https://github.com/ReallyGood/jQuery-cssP#readme">manual</a> to learn more.</p>
 	
 	<style>
@@ -35,27 +36,19 @@
 	<!-- Use jquery.cssp.min.js in production -->
 	<script src="jquery.cssp.js"></script>
 	<script>
+		$('output#b').html( $('body h1').cssP('before') );
+		
 		$('h1').cssP({
-			/*before: function(){
+			before: function(){
 				var direction = Math.random() < .5 ? 'left' : 'right';
 				var distance = Math.floor( Math.random() * 100 );				
 				return direction + ': ' + distance + 'px;';
-			},*/
+			},
 			after: 'content: "seudos"; font-weight: normal; color: rgba(0,0,0,0.4);',
 		});
 
-		$('output').html( $('h1').cssP('after') );
+		$('output#a').html( $('body h1').cssP('before') );
 	</script>
-	
-	<script>	
-	// https://developer.mozilla.org/en/DOM/CSSStyleDeclaration
-	// http://www.w3.org/TR/DOM-Level-2-Style/css.html#CSS-CSSStyleDeclaration
-	/*var s = rules[j].selectorText;
-					sheets[i].insertRule(s + '{background-color: yellow; color: green; font-size: 200%;}', j + 1);*/	
-	console.log( $('body h1').cssP('before') );	
-	</script>
-	
-	
 	<!-- Code below this point isn't related to the demo -->
 
 <footer>

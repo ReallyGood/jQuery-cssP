@@ -3,6 +3,7 @@ body {font-family: Vollkorn, Georgia, "New Century Schoolbook", "Nimbus Roman No
 footer {font-family: Georgia,"New Century Schoolbook","Nimbus Roman No9 L",serif;}
 p {margin: 10px 0; font-size: 18px;}
 code {font-family: Consolas, monospace; color: #333; font-size: 95%;}
+code.block {display: block; text-indent: 1em;}
 footer {font-style: italic; color: #777; margin-top: 30px;}
 footer p {font-size: 16px;}
 h1 {display: inline-block; *display: inline; zoom: 1; margin: 0;}
