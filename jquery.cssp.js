@@ -47,15 +47,14 @@ $.cssP = (function(){
 		updateSS: function(tag, sheet){
 			$(tag).text(sheet);
 		},
-		getAllPseudos: function(){
+		getPseudos: function(pRegex){
 			var sheets = document.styleSheets,
 				sheetsL = sheets.length,
 				i = 0,
 				j,
 				rules,
 				found = [],
-				foundIndexes = [],
-				pseudoRegex = /:?:before|:?:after|:?:first-child/ig;
+				foundIndexes = [];
 			for(var i = 0; i < sheetsL; i++){		
 				try {
 					rules = sheets[i].cssRules;
@@ -65,7 +64,7 @@ $.cssP = (function(){
 				if(rules) {
 					rulesL = rules.length;
 					for(j = 0; j < rulesL; j++){
-						if( pseudoRegex.test(rules[j].selectorText) ) {
+						if( pRegex.test(rules[j].selectorText) ) {
 							var r = rules[j];
 							//console.log('found pseudo style rule:', r);
 							found [ r.selectorText ] = r.style.cssText;
@@ -77,11 +76,11 @@ $.cssP = (function(){
 			return found;
 		},
 		getFromStylesheet: function(el, pseudo){			
-			var pseudoRegex = new RegExp(":?:" + pseudo, "ig");
-			var all = methods.getAllPseudos();
-			var found = null;
+			var pRegex = new RegExp(":?:" + pseudo, "ig"),
+				all = methods.getPseudos(pRegex),
+				found = null;
 			for(p in all) {
-				var element = p.replace(pseudoRegex, '');
+				var element = p.replace(pRegex, '');				
 				if( $(el).is(element) ) {
 					found = all[p];
 					break;
