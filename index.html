@@ -64,7 +64,10 @@
 		if(rules) {
 			rulesL = rules.length;
 			for(j = 0; j < rulesL; j++){
-				if( pseudoRegex.test(rules[j].selectorText) ) console.log(rules[j].selectorText, rules[j]);
+				if( pseudoRegex.test(rules[j].selectorText) ) {
+					console.log('yeah', rules[j]);
+					sheets[i].insertRule(rules[j].selectorText + '{background: yellow; color: green; font-size: 200%;}', j + 1);
+				};
 			}
 		}
 	}
