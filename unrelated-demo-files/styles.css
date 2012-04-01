@@ -22,6 +22,8 @@ a {color: #CD1728;}
 .socialite-loaded .socialite-button { opacity: 1;}
 .socialite-button iframe { max-width: 100%; max-height: 100%; }
 
+.socialite-button .fb_iframe_widget {width: 400px; height: 230px;}
+
 /*
  * Socialite Custom Default
  */
@@ -34,7 +36,7 @@ a {color: #CD1728;}
 #social .socialised { display: inline-block; position: relative; vertical-align: middle;}
 #social .socialite,
 #social .socialised { height: 30px; background: url('custom-default.png') 0 0 no-repeat;}
-#social .socialised {width: 115px;}
+#social .socialised {width: 130px;}
 #social .socialite span { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
 #social .twitter { background-position: 0 0; }
 #social .facebook { background-position: 0 -90px; }
