@@ -65,8 +65,9 @@
 			rulesL = rules.length;
 			for(j = 0; j < rulesL; j++){
 				if( pseudoRegex.test(rules[j].selectorText) ) {
-					console.log('yeah', rules[j]);
-					sheets[i].insertRule(rules[j].selectorText + '{background: yellow; color: green; font-size: 200%;}', j + 1);
+					console.log('found pseudo style rule:', rules[j]);
+					var s = rules[j].selectorText;
+					sheets[i].insertRule(s + '{background-color: yellow; color: green; font-size: 200%;}', j + 1);
 				};
 			}
 		}
