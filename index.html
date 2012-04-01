@@ -36,11 +36,11 @@
 	<script src="jquery.cssp.js"></script>
 	<script>
 		$('h1').cssP({
-			before: function(){
+			/*before: function(){
 				var direction = Math.random() < .5 ? 'left' : 'right';
 				var distance = Math.floor( Math.random() * 100 );				
 				return direction + ': ' + distance + 'px;';
-			},
+			},*/
 			after: 'content: "seudos"; font-weight: normal; color: rgba(0,0,0,0.4);',
 		});
 
@@ -50,28 +50,9 @@
 	<script>	
 	// https://developer.mozilla.org/en/DOM/CSSStyleDeclaration
 	// http://www.w3.org/TR/DOM-Level-2-Style/css.html#CSS-CSSStyleDeclaration
-	var sheets = document.styleSheets,
-		sheetsL = sheets.length,
-		i = 0, j,
-		rules,
-		pseudoRegex = new RegExp(":?:before|:?:after|:?:first-child", "ig");
-	for(var i = 0; i < sheetsL; i++){		
-		try {
-			rules = sheets[i].cssRules;
-		} catch(e){
-			console.log(e);
-		}
-		if(rules) {
-			rulesL = rules.length;
-			for(j = 0; j < rulesL; j++){
-				if( pseudoRegex.test(rules[j].selectorText) ) {
-					console.log('found pseudo style rule:', rules[j]);
-					var s = rules[j].selectorText;
-					sheets[i].insertRule(s + '{background-color: yellow; color: green; font-size: 200%;}', j + 1);
-				};
-			}
-		}
-	}
+	/*var s = rules[j].selectorText;
+					sheets[i].insertRule(s + '{background-color: yellow; color: green; font-size: 200%;}', j + 1);*/	
+	console.log( $('body h1').cssP('before') );	
 	</script>
 	
 	

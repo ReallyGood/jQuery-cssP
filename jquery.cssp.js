@@ -47,8 +47,51 @@ $.cssP = (function(){
 		updateSS: function(tag, sheet){
 			$(tag).text(sheet);
 		},
-		get: function(el, pseudo, getFull){
-			if(!cache[el.selector]) return null;
+		getAllPseudos: function(){
+			var sheets = document.styleSheets,
+				sheetsL = sheets.length,
+				i = 0,
+				j,
+				rules,
+				found = [],
+				foundIndexes = [],
+				pseudoRegex = /:?:before|:?:after|:?:first-child/ig;
+			for(var i = 0; i < sheetsL; i++){		
+				try {
+					rules = sheets[i].cssRules;
+				} catch(e){
+					//console.log(e);
+				}
+				if(rules) {
+					rulesL = rules.length;
+					for(j = 0; j < rulesL; j++){
+						if( pseudoRegex.test(rules[j].selectorText) ) {
+							var r = rules[j];
+							//console.log('found pseudo style rule:', r);
+							found [ r.selectorText ] = r.style.cssText;
+						};
+					}
+				}
+			}
+			
+			return found;
+		},
+		getFromStylesheet: function(el, pseudo){			
+			var pseudoRegex = new RegExp(":?:" + pseudo, "ig");
+			var all = methods.getAllPseudos();
+			var found = null;
+			for(p in all) {
+				var element = p.replace(pseudoRegex, '');
+				if( $(el).is(element) ) {
+					found = all[p];
+					break;
+				}
+			};
+
+			return found;
+		},
+		get: function(el, pseudo, getFull){			
+			if(!cache[el.selector]) return methods.getFromStylesheet(el, pseudo);
 
 			var sheet = cache[el.selector].text();			
 			if(!getFull) {
