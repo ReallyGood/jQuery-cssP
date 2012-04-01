@@ -26,7 +26,11 @@
 	Also, the <code>:after</code> ruleset of that heading is: <code><output></output></code></p>
 	<p>Inspect, view source and read the <a href="https://github.com/ReallyGood/jQuery-cssP#readme">manual</a> to learn more.</p>
 	
-	
+	<style>
+	@media all {
+		a:before {content:: "WTF";}
+	}
+	</style>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<!-- Use jquery.cssp.min.js in production -->
 	<script src="jquery.cssp.js"></script>
@@ -41,6 +45,29 @@
 		});
 
 		$('output').html( $('h1').cssP('after') );
+	</script>
+	
+	<script>	
+	// https://developer.mozilla.org/en/DOM/CSSStyleDeclaration
+	// http://www.w3.org/TR/DOM-Level-2-Style/css.html#CSS-CSSStyleDeclaration
+	var sheets = document.styleSheets,
+		sheetsL = sheets.length,
+		i = 0, j,
+		rules,
+		pseudoRegex = new RegExp(":?:before|:?:after|:?:first-child", "ig");
+	for(var i = 0; i < sheetsL; i++){		
+		try {
+			rules = sheets[i].cssRules;
+		} catch(e){
+			console.log(e);
+		}
+		if(rules) {
+			rulesL = rules.length;
+			for(j = 0; j < rulesL; j++){
+				if( pseudoRegex.test(rules[j].selectorText) ) console.log(rules[j].selectorText, rules[j]);
+			}
+		}
+	}
 	</script>
 	
 	
