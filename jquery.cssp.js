@@ -65,12 +65,16 @@ $.cssP = (function(){
 						if( pRegex.test(rules[j].selectorText) ) {
 							var r = rules[j];
 							//console.log('found pseudo style rule:', r);
-							found[ r.selectorText ] = ( found[ r.selectorText ] ) ? found[ r.selectorText ] += ' ' + r.style.cssText : found[ r.selectorText ] =  r.style.cssText;
+							if ( found[ r.selectorText ] ) {
+								found[ r.selectorText ] += ' ' +  r.style.cssText;
+							} else {
+								found[ r.selectorText ] = r.style.cssText;
+							}
 						};
 					}
 				}
 			}
-			
+
 			return found;
 		},
 		get: function(el, pseudo){			
