@@ -7,15 +7,12 @@
 (function($){
 
 $.cssP = (function(){
-	var cache = {},
-		methods = {};
+	var methods = {};
 	$.extend(methods, {
 		set: function(el, changes){
 			var s = el.selector;
 			if(!s) return;
-			styleTag = cache[s] || $('<style></style>');
-			styleTag.appendTo('body');
-			cache[s] = styleTag;
+			styleTag = $('<style></style>').appendTo('body');
 			
 			var stylesheet = '';
 			$.each(changes, function(key, ruleset){
@@ -68,7 +65,7 @@ $.cssP = (function(){
 						if( pRegex.test(rules[j].selectorText) ) {
 							var r = rules[j];
 							//console.log('found pseudo style rule:', r);
-							found [ r.selectorText ] = r.style.cssText;
+							found[ r.selectorText ] = ( found[ r.selectorText ] ) ? found[ r.selectorText ] += ' ' + r.style.cssText : found[ r.selectorText ] =  r.style.cssText;
 						};
 					}
 				}
@@ -76,7 +73,7 @@ $.cssP = (function(){
 			
 			return found;
 		},
-		getFromStylesheet: function(el, pseudo){			
+		get: function(el, pseudo){			
 			var pRegex = new RegExp(":?:" + pseudo, "ig"),
 				all = methods.getPseudos(pRegex),
 				found = null;
@@ -89,27 +86,16 @@ $.cssP = (function(){
 			};
 
 			return found;
-		},
-		get: function(el, pseudo, getFull){			
-			if(!cache[el.selector]) return methods.getFromStylesheet(el, pseudo);
-
-			var sheet = cache[el.selector].text();			
-			if(!getFull) {
-				sheet = sheet.split(':' + pseudo)[1];
-				if(!sheet) return null;
-				sheet = sheet.split('}')[0].slice(1);
-			}
-			return sheet;
 		}
 	});
 
-	$.fn.cssP = function(data, value, getFull){
+	$.fn.cssP = function(data, value){
 		var $this = $(this);
 		if(typeof data === 'object') {
 			methods.set($this, data);
 			return $this;
 		} else if(typeof data === 'string' && typeof value == 'undefined'){
-			return methods.get($this, data, getFull);
+			return methods.get($this, data);
 		} else if(typeof data === 'string' && typeof value === 'string' || typeof value === 'function') {
 			var setOne = {};
 			setOne[data] = value;
