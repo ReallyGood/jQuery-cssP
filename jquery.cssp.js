@@ -13,7 +13,8 @@ $.cssP = (function(){
 		set: function(el, changes){
 			var s = el.selector;
 			if(!s) return;
-			styleTag = cache[s] || $('<style></style>').appendTo('body');
+			styleTag = cache[s] || $('<style></style>');
+			styleTag.appendTo('body');
 			cache[s] = styleTag;
 			
 			var stylesheet = '';
@@ -102,13 +103,17 @@ $.cssP = (function(){
 		}
 	});
 
-	$.fn.cssP = function(data, getFull){
+	$.fn.cssP = function(data, value, getFull){
 		var $this = $(this);
 		if(typeof data === 'object') {
 			methods.set($this, data);
 			return $this;
-		} else if(data == 'before' || data == 'after'){
+		} else if(typeof data === 'string' && typeof value == 'undefined'){
 			return methods.get($this, data, getFull);
+		} else if(typeof data === 'string' && typeof value === 'string' || typeof value === 'function') {
+			var setOne = {};
+			setOne[data] = value;
+			return methods.set($this, setOne);
 		}
 	};
 })();
