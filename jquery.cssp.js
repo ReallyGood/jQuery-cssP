@@ -13,7 +13,6 @@ $.cssP = (function(){
 		set: function(el, changes){
 			var s = el.selector;
 			if(!s) return;
-			styleTag = $('<style></style>').appendTo('body');
 			
 			var stylesheet = '';
 			$.each(changes, function(key, ruleset){
@@ -43,10 +42,10 @@ $.cssP = (function(){
 				}
 			});
 			
-			methods.updateSS(styleTag, stylesheet);
+			methods.createSS(stylesheet);
 		},
-		updateSS: function(tag, sheet){
-			$(tag).text(sheet);
+		createSS: function(sheet){
+			$('<style>' + sheet + '</style>').appendTo('body');
 		},
 		getPseudos: function(pRegex){
 			var sheets = document.styleSheets,
