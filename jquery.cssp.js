@@ -8,8 +8,7 @@
 
 $.cssP = (function(){
 	var methods = {},
-		seperator = ':',
-		doubleColons = ['selection'];
+		doubleColons = ['selection', '-moz-selection'];
 	$.extend(methods, {
 		set: function(el, changes){
 			var s = el.selector;
@@ -20,7 +19,8 @@ $.cssP = (function(){
 			$.each(changes, function(key, ruleset){
 				var newRuleset,
 					declaration,
-					skip;
+					skip,
+					seperator = ':';
 				
 				if(typeof ruleset === 'function') {
 					// let's do our best to get a string back
@@ -37,7 +37,7 @@ $.cssP = (function(){
 				}
 
 				if(!skip) {
-					if( $.inArray(doubleColons, key) ) seperator = '::';
+					if( $.inArray(key, doubleColons) >= 0) seperator = '::';
 					declaration = s + seperator + key + '{' + newRuleset + '}';
 					stylesheet += declaration + '\r';
 				}
