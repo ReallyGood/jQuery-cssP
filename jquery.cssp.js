@@ -58,14 +58,14 @@ $.cssP = (function(){
 
 			for(var i = 0; i < sheetsL; i++){		
 				try {
-					rules = sheets[i].cssRules;
+					rules = sheets[i].cssRules || sheets[i].rules;
 				} catch(e){
 					//console.log(e);
 				}
 				if(rules) {
 					rulesL = rules.length;
 					for(j = 0; j < rulesL; j++){
-						if( pRegex.test(rules[j].selectorText) ) {
+						if( pRegex.test(rules[j].selectorText) ) {							
 							var r = rules[j];
 							//console.log('found pseudo style rule:', r);
 							if ( found[ r.selectorText ] ) {
