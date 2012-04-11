@@ -6,6 +6,10 @@
 
 (function($){
 
+var regExpEscape = function(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+}
+
 $.cssP = (function(){
 	var methods = {},
 		doubleColons = ['selection', '-moz-selection'];
@@ -65,13 +69,15 @@ $.cssP = (function(){
 				if(rules) {
 					rulesL = rules.length;
 					for(j = 0; j < rulesL; j++){
-						if( pRegex.test(rules[j].selectorText) ) {							
-							var r = rules[j];
-							//console.log('found pseudo style rule:', r);
-							if ( found[ r.selectorText ] ) {
-								found[ r.selectorText ] += ' ' +  r.style.cssText;
+						if( pRegex.test(rules[j].selectorText) ) {
+							var r = rules[j],
+								s = r.selectorText,
+								css = r.style.cssText;
+							//console.log('found pseudo style rule:', r, css);
+							if ( found[s] ) {
+								found[s] += ' ' + css;
 							} else {
-								found[ r.selectorText ] = r.style.cssText;
+								found[s] = css;
 							}
 						};
 					}
@@ -81,7 +87,7 @@ $.cssP = (function(){
 			return found;
 		},
 		get: function(el, pseudo){			
-			var pRegex = new RegExp(":?:" + pseudo, "ig"),
+			var pRegex = new RegExp(':?:' + regExpEscape(pseudo) + '$', 'ig'),
 				all = methods.getPseudos(pRegex),
 				found = null;
 			for(p in all) {
