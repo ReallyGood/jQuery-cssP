@@ -7,7 +7,9 @@
 (function($){
 
 $.cssP = (function(){
-	var methods = {};
+	var methods = {},
+		seperator = ':',
+		doubleColons = ['selection'];
 	$.extend(methods, {
 		set: function(el, changes){
 			var s = el.selector;
@@ -35,7 +37,8 @@ $.cssP = (function(){
 				}
 
 				if(!skip) {
-					declaration = s + ':' + key + '{' + newRuleset + '}';
+					if( $.inArray(doubleColons, key) ) seperator = '::';
+					declaration = s + seperator + key + '{' + newRuleset + '}';
 					stylesheet += declaration + '\r';
 				}
 			});
@@ -53,6 +56,7 @@ $.cssP = (function(){
 				rules,
 				found = [],
 				foundIndexes = [];
+
 			for(var i = 0; i < sheetsL; i++){		
 				try {
 					rules = sheets[i].cssRules;
