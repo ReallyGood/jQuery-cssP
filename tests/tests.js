@@ -1,3 +1,11 @@
+function startTests(){
+
 test('Simple Color', function() { 
-    equal( $('#testswarm h1').css('color'), 'rgb(0, 0, 0)');
+    equal( $('h1').css('color'), 'rgb(0, 0, 0)');
 })
+
+test('basic functionality', function(){
+	ok( $('h1').length > 0, 'Hello World');
+});
+
+}

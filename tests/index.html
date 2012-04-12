@@ -1,7 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
 <head>
+	<meta charset="utf-8">
 	<title>QUnit Test Suite</title>
+	<style>
+		#testpage {width: 100%; border: 1px solid #ccc; margin: 10px 0; height: 350px;}
+	</style>
 	<link rel="stylesheet" href="tests.css" media="screen">
 	<link rel="stylesheet" href="qunit.css" media="screen">
 </head>
@@ -11,14 +15,20 @@
 	<div id="qunit-testrunner-toolbar"></div>
 	<h2 id="qunit-userAgent"></h2>
 	<ol id="qunit-tests"></ol>
-	<div id="testswarm">
-		<h1>Test me, I'm an h1</h1>
-	</div>
+	<iframe id="testpage"></iframe>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<script src="qunit.js"></script>
-	<!-- Your project file goes here -->
 	<script src="../jquery.cssp.js"></script>
-	<!-- Your tests file goes here -->
-	<script type="text/javascript" src="tests.js"></script>
+	<script src="tests.js"></script>
+	<script>
+	var $$ = jQuery.noConflict(true);
+	var $ = jQuery = null;
+	$$('#testpage').load(function() {
+		$ = jQuery = window.frames[0].jQuery;
+		$.ajaxSetup({ async: false });
+		$.fx.off = true;
+		startTests();
+	}).attr('src', './testpage.html');
+	</script>
 </body>  
 </html>
