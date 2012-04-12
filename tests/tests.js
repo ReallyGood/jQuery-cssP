@@ -1,13 +1,30 @@
 function startTests(){
 
-module('Basics');
+module('Preflight');
 
-test('Simple Color', function() { 
-    equal( $('#basics h1').css('color'), 'rgb(0, 0, 0)');
+test('jQuery is loaded', function() { 
+    equal( typeof jQuery, 'function');
 })
 
-test('basic functionality', function(){
-	ok( $('#basics h1').length > 0, 'Hello World');
+test('jQuery.cssP is loaded', function() { 
+    equal( typeof $.fn.cssP, 'function');
+})
+
+test('Elements exist', function(){	
+	ok( $('body > ul').children().length > 0, 'Some elements are ready for testing');
+});
+
+module('Basic get');
+test('No pseudos', function(){
+	equal( $('#basics .noPseudo').cssP('before'), null);
+});
+
+test('One pseudo, one rule', function(){
+	equal( $('#basics .oneRule').cssP('before'), 'font-size: 16px;');
+});
+
+test('One pseudo, multiple rules', function(){
+	equal( $('#basics .multipleRules').cssP('after'), 'font-size: 16px; color: blue;');
 });
 
 }
