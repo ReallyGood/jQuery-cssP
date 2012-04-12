@@ -89,4 +89,18 @@ test('Multiple pseudos set', function(){
 	equal( $('#set .multipleSet').cssP('after'), 'font-weight: bold;');
 });
 
+test('Get, then set (appends)', function(){
+	equal( $('#set .override').cssP('before'), 'color: green;', 'get');
+	$('#set .override').cssP('before', 'color: blue;');
+	equal( $('#set .override').cssP('before'), 'color: green; color: blue;');
+});
+
+/* Maybe it will be better when this one will pass:*//*
+test('Get, then set (append)', function(){
+	equal( $('#set .override').cssP('before'), 'color: green;', 'get');
+	$('#set .override').cssP('before', 'color: blue;');
+	equal( $('#set .override').cssP('before'), 'color: blue;');
+});
+*/
+
 }

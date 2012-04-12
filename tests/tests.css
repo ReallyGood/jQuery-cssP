@@ -17,3 +17,5 @@ li {list-style: none outside;}
 #edge .c1:before, #edge .c2:before {content: "These two have the same :before - ";}
 #edge .mixedCompound:before, #edge .unrelatedDummy {font-style: italic;}
 #edge .des :first-child strong {color: purple;}
+
+#set .override:before {color: green;}
