@@ -20,11 +20,11 @@ test('No pseudos', function(){
 });
 
 test('One pseudo, one rule', function(){
-	equalTrim( $('#basics .oneRule').cssP('before'), 'font-size: 16px;');
+	equal( $('#basics .oneRule').cssP('before'), 'font-size: 16px;');
 });
 
 test('One pseudo, multiple rules', function(){
-	equalTrim( $('#basics .multipleRules').cssP('after'), 'font-size: 16px; color: blue;');
+	equal( $('#basics .multipleRules').cssP('after'), 'font-size: 16px; color: blue;');
 });
 
 }

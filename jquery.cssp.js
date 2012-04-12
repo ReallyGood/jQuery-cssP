@@ -93,7 +93,7 @@ $.cssP = (function(){
 			for(p in all) {
 				var element = p.replace(pRegex, '');				
 				if( $(el).is(element) ) {
-					found = all[p];
+					found = $.trim( all[p] );
 					break;
 				}
 			};

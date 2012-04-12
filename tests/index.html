@@ -24,9 +24,6 @@
 	// thanks to http://www.mattevanoff.com/2011/01/unit-testing-jquery-w-qunit/
 	var $$ = jQuery.noConflict(true);
 	var $ = jQuery = null;
-	var equalTrim = function(actual, expected, message){
-		return equal( $.trim(actual), expected, message );
-	};
 	$$('#testpage').load(function() {
 		$ = jQuery = window.frames[0].jQuery;
 		$.ajaxSetup({ async: false });
