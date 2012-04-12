@@ -1,4 +1,4 @@
-ul, li {margin: 0; padding: 0;}
+p, ul, li {margin: 0; padding: 0;}
 li {list-style: none outside;}
 
 #basics .oneRule:before {font-size: 16px;}
@@ -7,3 +7,13 @@ li {list-style: none outside;}
 
 #edge .first:first-child {color: green;}
 #edge .nth:nth-child(-n+6) {color: green;}
+#edge .implied :first-line {font-weight: bold;}
+:first-letter {letter-spacing: 0.1px;}
+
+::selection {text-shadow: none;}
+::-moz-selection {text-shadow: none;}
+
+#edge .combined:hover:before {color: red;}
+#edge .c1:before, #edge .c2:before {content: "These two have the same :before - ";}
+#edge .mixedCompound:before, #edge .unrelatedDummy {font-style: italic;}
+#edge .des :first-child strong {color: purple;}

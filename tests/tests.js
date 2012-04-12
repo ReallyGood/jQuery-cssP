@@ -33,11 +33,43 @@ test('Different selectors for set & get', function(){
 
 module('Edge Cases');
 test('Pseudos with special characters: first-child', function(){
-	equal( $('#edge .first').cssP('first-child'), 'color: green;' );
+	equal( $('#edge .first').cssP('first-child'), 'color: green;');
 });
 
 test('Pseudos with special characters: nth-child(-n+6)', function(){
-	equal( $('#edge .nth').cssP('nth-child(-n+6)'), 'color: green;' );
+	equal( $('#edge .nth').cssP('nth-child(-n+6)'), 'color: green;');
+});
+
+test('Implied star selector within another element', function(){
+	equal( $('#edge .implied *').cssP('first-line'), 'font-weight: bold;');
+});
+
+test('Implied star selector', function(){
+	equal( $('*').cssP('first-letter'), 'letter-spacing: 0.1px;');
+});
+
+test('Proprietary pseudos: -moz-selection', function(){
+	equal( $('*').cssP('-moz-selection'), 'text-shadow: none;');
+});
+
+test('Combined: :hover:before', function(){
+	equal( $('#edge .combined').cssP('hover:before'), 'color: red;');
+});
+
+test('Combined: :hover::before', function(){
+	equal( $('#edge .combined').cssP('hover::before'), 'color: red;');
+});
+
+test('Compound: #edge .c1, #edge .c2', function(){
+	equal( $('#edge .c1, #edge .c2').cssP('before'), 'content: "These two have the same :before - ";');
+});
+
+test('Mixed pseudo with a unrelated selector', function(){	
+	equal( $('#edge .mixedCompound').cssP('before'), 'font-style: italic;');
+});
+
+test('Descendant selectors within a pseudo: :first-child strong', function(){
+	equal( $('#edge .des').cssP('first-child strong'), 'color: purple;');
 });
 
 }
