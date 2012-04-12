@@ -1,7 +1,7 @@
 function startTests(){
 
-module('Preflight');
 
+module('Preflight');
 test('jQuery is loaded', function() { 
     equal( typeof jQuery, 'function');
 })
@@ -13,6 +13,7 @@ test('jQuery.cssP is loaded', function() {
 test('Elements exist', function(){	
 	ok( $('body > ul').children().length > 0, 'Some elements are ready for testing');
 });
+
 
 module('Basic get');
 test('No pseudos', function(){
@@ -30,6 +31,7 @@ test('One pseudo, multiple rules', function(){
 test('Different selectors for set & get', function(){
 	equal( $('#basics .last2').cssP('before'), 'color: orange;');
 });
+
 
 module('Edge Cases');
 test('Pseudos with special characters: first-child', function(){
@@ -70,6 +72,21 @@ test('Mixed pseudo with a unrelated selector', function(){
 
 test('Descendant selectors within a pseudo: :first-child strong', function(){
 	equal( $('#edge .des').cssP('first-child strong'), 'color: purple;');
+});
+
+module('Set');
+test('Basic set', function(){
+	$('#set .set').cssP('before', 'color: green;');
+	equal( $('#set .set').cssP('before'), 'color: green;');
+});
+
+test('Multiple pseudos set', function(){
+	$('#set .multipleSet').cssP({
+		'before': 'color: green;',
+		'after': 'font-weight: bold;'
+	});
+	equal( $('#set .multipleSet').cssP('before'), 'color: green;');
+	equal( $('#set .multipleSet').cssP('after'), 'font-weight: bold;');
 });
 
 }
