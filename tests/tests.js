@@ -27,4 +27,17 @@ test('One pseudo, multiple rules', function(){
 	equal( $('#basics .multipleRules').cssP('after'), 'font-size: 16px; color: blue;');
 });
 
+test('Different selectors for set & get', function(){
+	equal( $('#basics .last2').cssP('before'), 'color: orange;');
+});
+
+module('Edge Cases');
+test('Pseudos with special characters: first-child', function(){
+	equal( $('#edge .first').cssP('first-child'), 'color: green;' );
+});
+
+test('Pseudos with special characters: nth-child(-n+6)', function(){
+	equal( $('#edge .nth').cssP('nth-child(-n+6)'), 'color: green;' );
+});
+
 }
