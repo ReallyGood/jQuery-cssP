@@ -46,10 +46,15 @@ $.cssP = (function(){
 				}
 			});
 			
-			methods.createSS(stylesheet);
+			methods.updateSS(stylesheet);
 		},
-		createSS: function(sheet){
-			$('<style>' + sheet + '</style>').appendTo('body');
+		updateSS: function(sheet){
+			var styleTag = $('#cssPSheet');
+			if(styleTag.length) {
+				styleTag.text( styleTag.text() + sheet);
+			} else {
+				$('<style id="cssPSheet">' + sheet + '</style>').appendTo('body');
+			}
 		},
 		getPseudos: function(pRegex){
 			var sheets = document.styleSheets,
@@ -86,7 +91,7 @@ $.cssP = (function(){
 
 			return found;
 		},
-		get: function(el, pseudo){			
+		get: function(el, pseudo){
 			var pRegex = new RegExp(':?:' + regExpEscape(pseudo) + '$', 'ig'),
 				all = methods.getPseudos(pRegex),
 				found = null;
