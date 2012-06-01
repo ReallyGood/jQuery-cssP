@@ -91,7 +91,7 @@ $.cssP = (function(){
 
 			return found;
 		},
-		get: function(el, pseudo, property){
+		get: function(el, pseudo){
 			var pRegex = new RegExp(':?:' + regExpEscape(pseudo) + '$', 'ig'),
 				all = methods.getPseudos(pRegex),
 				found = null;
@@ -103,16 +103,6 @@ $.cssP = (function(){
 				}
 			};
 
-			if(property) {
-				if(!found) return null;
-				var rulesets = found.split(property).slice(1);
-				if(!rulesets.length) return null;
-				rulesets = $.map(rulesets, function(s){
-					// ': color: red; opacity: 2;' => 'color: red'
-					return $.trim( s.split(';')[0].slice(1) );
-				});
-				return rulesets[rulesets.length - 1];
-			}
 			return found;
 		}
 	});
@@ -122,9 +112,9 @@ $.cssP = (function(){
 		if(typeof data === 'object') {
 			methods.set($this, data);
 			return $this;
-		} else if(typeof data === 'string' && typeof value == 'undefined'){
+		} else if(typeof data === 'string' && typeof value === 'undefined'){
 			return methods.get($this, data);
-		} else if(typeof data === 'string' && typeof value == 'string' && value.indexOf(':') === -1){
+		} else if(typeof data === 'string' && typeof value === 'string' && value.indexOf(':') === -1){
 			return methods.get($this, data, value);
 		} else if(typeof data === 'string' && typeof value === 'string' || typeof value === 'function') {
 			var setOne = {};
