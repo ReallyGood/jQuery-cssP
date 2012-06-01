@@ -20,7 +20,7 @@
 	 
 	<style>
 		h1 {position: relative;}
-		h1:before {content: '\2665'; position: absolute; color: #CD1728; width: 80px; height: 3px; top: -20px;}
+		h1:before {content: '\2665'; position: absolute; color: #CD1728; width: 80px; height: 3px; top: -20px; left: 50px;}
 
 		::selection {background: hotpink;}
 		::-moz-selection {background: hotpink;}
@@ -42,18 +42,11 @@
 	<!-- Use jquery.cssp.min.js in production -->
 	<script src="jquery.cssp.js"></script>
 	<script>
-		$('output#b').html( $('body h1').cssP('before') );
+		$('output#b').html( $('body h1').cssP('after', 'content') );
 		
-		$('h1').cssP({
-			before: function(){
-				var direction = Math.random() < .5 ? 'left' : 'right';
-				var distance = Math.floor( Math.random() * 100 );				
-				return direction + ': ' + distance + 'px;';
-			},
-			after: 'content: "seudos"; font-weight: normal; color: rgba(0,0,0,0.4);',
-		});
+		$('h1').cssP('after', 'content: "seudos"; font-weight: normal; color: rgba(0,0,0,0.4);');
 
-		$('output#a').html( $('body h1').cssP('before') );
+		$('output#a').html( $('body h1').cssP('after', 'content') );
 	</script>
 	<!-- Code below this point isn't related to the demo -->
 
