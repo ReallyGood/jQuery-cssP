@@ -57,11 +57,11 @@ $.cssP = (function(){
 			}
 		},
 		get: function(el, pseudo, property){
-			var style = getComputedStyle(el[0], pseudo);
+			// warning: This returns 'calculated style' even for unknown pseudo elements, so make sure you spell them right (e.g. 'before' and not 'bEfore')
+			var style = getComputedStyle(el[0], pseudo); 
 			if(!property) return style.cssText;
 			var rule = style.getPropertyCSSValue(property);
-			rule = rule ? rule.cssText : null;
-			return rule;
+			return rule ? rule.cssText : null;
 		}
 	});
 
