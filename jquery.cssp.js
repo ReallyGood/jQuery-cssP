@@ -56,54 +56,11 @@ $.cssP = (function(){
 				$('<style id="cssPSheet">' + sheet + '</style>').appendTo('body');
 			}
 		},
-		getPseudos: function(pRegex){
-			var sheets = document.styleSheets,
-				sheetsL = sheets.length,
-				i = 0,
-				j,
-				rules,
-				found = [],
-				foundIndexes = [];
-
-			for(var i = 0; i < sheetsL; i++){		
-				try {
-					rules = sheets[i].cssRules || sheets[i].rules;
-				} catch(e){
-					//console.log(e);
-				}
-				if(rules) {
-					rulesL = rules.length;
-					for(j = 0; j < rulesL; j++){
-						if( pRegex.test(rules[j].selectorText) ) {
-							var r = rules[j],
-								s = r.selectorText,
-								css = r.style.cssText;
-							//console.log('found pseudo style rule:', r, css);
-							if ( found[s] ) {
-								found[s] += ' ' + css;
-							} else {
-								found[s] = css;
-							}
-						};
-					}
-				}
-			}
-
-			return found;
-		},
-		get: function(el, pseudo){
-			var pRegex = new RegExp(':?:' + regExpEscape(pseudo) + '$', 'ig'),
-				all = methods.getPseudos(pRegex),
-				found = null;
-			for(p in all) {
-				var element = p.replace(pRegex, '');				
-				if( $(el).is(element) ) {
-					found = $.trim( all[p] );
-					break;
-				}
-			};
-
-			return found;
+		get: function(el, pseudo, property){
+			var style = getComputedStyle(el[0], pseudo);
+			if(!style) return;
+			var rule = property ? style.getPropertyCSSValue(property).cssText : style.cssText;
+			return rule;
 		}
 	});
 
@@ -112,8 +69,10 @@ $.cssP = (function(){
 		if(typeof data === 'object') {
 			methods.set($this, data);
 			return $this;
-		} else if(typeof data === 'string' && typeof value == 'undefined'){
+		} else if(typeof data === 'string' && typeof value === 'undefined'){
 			return methods.get($this, data);
+		} else if(typeof data === 'string' && ( typeof value === 'string' && value.indexOf(':') === -1 ) ){
+			return methods.get($this, data, value);
 		} else if(typeof data === 'string' && typeof value === 'string' || typeof value === 'function') {
 			var setOne = {};
 			setOne[data] = value;
