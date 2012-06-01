@@ -58,8 +58,9 @@ $.cssP = (function(){
 		},
 		get: function(el, pseudo, property){
 			var style = getComputedStyle(el[0], pseudo);
-			if(!style) return;
-			var rule = property ? style.getPropertyCSSValue(property).cssText : style.cssText;
+			if(!property) return style.cssText;
+			var rule = style.getPropertyCSSValue(property);
+			rule = rule ? rule.cssText : null;
 			return rule;
 		}
 	});
